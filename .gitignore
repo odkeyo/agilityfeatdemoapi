@@ -1,0 +1,14 @@
+# Archivos binarios y compilados
+bin/
+obj/
+*.db
+
+# Configuración de usuario en Visual Studio
+.vscode/
+*.suo
+*.user
+*.cache
+*.log
+
+# Secretos y archivos de configuración
+appsettings.json
