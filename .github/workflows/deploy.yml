@@ -23,13 +23,13 @@ jobs:
           dotnet-version: '9.0.x'  # Ajusta según tu versión
 
       - name: Restore dependencies
-        run: dotnet restore Backend/Backend.sln
+        run: dotnet restore Backend.sln
 
       - name: Build with dotnet
-        run: dotnet build Backend/Backend.sln --configuration Release --no-restore
+        run: dotnet build Backend.sln --configuration Release --no-restore
 
       - name: dotnet publish
-        run: dotnet publish Backend/Backend.sln -c Release -o "${{env.DOTNET_ROOT}}/myapp" --no-build
+        run: dotnet publish Backend.sln -c Release -o "${{env.DOTNET_ROOT}}/myapp" --no-build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
