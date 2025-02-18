@@ -15,12 +15,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Habilitar Swagger
-if (app.Environment.IsDevelopment())
+// Habilitar Swagger en cualquier entorno, no solo en desarrollo
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) 
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 // Aplicar CORS antes de los middlewares de seguridad
 app.UseCors("AllowFrontend");
