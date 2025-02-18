@@ -4,9 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.WithOrigins("http://localhost:3000") // Permitir React
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+        policy => policy.WithOrigins(
+            "http://localhost:3000", // Desarrollo local
+            "https://calm-tree-00984470f.4.azurestaticapps.net" // Frontend en Azure
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 });
 
 builder.Services.AddControllers();
