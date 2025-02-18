@@ -34,3 +34,4 @@ C:\git sources\temp\agilityfeatdemoapi\Backend\obj\Debug\net9.0\ref\Backend.dll
 C:\git sources\temp\agilityfeatdemoapi\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\git sources\temp\agilityfeatdemoapi\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\git sources\temp\agilityfeatdemoapi\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\git sources\temp\agilityfeatdemoapi\Backend\obj\Debug\net9.0\Backend.sourcelink.json
