@@ -1,6 +1,8 @@
 # Archivos binarios y compilados
 bin/
+bin/*
 obj/
+obj/*
 *.db
 
 # Configuración de usuario en Visual Studio
