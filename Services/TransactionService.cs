@@ -19,5 +19,9 @@ namespace Backend.Services
         public async Task<int> InsertAsync(Transaction transaction) => await _repository.InsertAsync(transaction);
         public async Task<bool> UpdateAsync(Transaction transaction) => await _repository.UpdateAsync(transaction);
         public async Task<bool> DeleteAsync(int id) => await _repository.DeleteAsync(id);
+        public async Task<IEnumerable<Transaction>> GetFilteredTransactionsAsync(TransactionFilter filter)
+        {
+            return await _repository.GetFilteredTransactionsAsync(filter);
+        }
     }
 }

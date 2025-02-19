@@ -11,7 +11,7 @@ namespace Backend.Repositories
     {
         private readonly AppDbContext _context;
 
-        public TransactionRepository(AppDbContext context)  // 🔹 Cambiado para recibir AppDbContext directamente
+        public TransactionRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -47,5 +47,23 @@ namespace Backend.Repositories
             _context.Transactions.Remove(transaction);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<IEnumerable<Transaction>> GetFilteredTransactionsAsync(TransactionFilter filter)
+        {
+            var query = _context.Transactions.AsQueryable();
+            if (!string.IsNullOrEmpty(filter.Type))
+                query = query.Where(t => t.Type == filter.Type);
+            if (filter.MinAmount.HasValue)
+                query = query.Where(t => t.Amount >= filter.MinAmount.Value);
+            if (filter.MaxAmount.HasValue)
+                query = query.Where(t => t.Amount <= filter.MaxAmount.Value);
+            if (filter.StartDate.HasValue)
+                query = query.Where(t => t.Date >= filter.StartDate.Value);
+            if (filter.EndDate.HasValue)
+                query = query.Where(t => t.Date <= filter.EndDate.Value);
+
+            return await query.ToListAsync();
+        }
+
     }
 }

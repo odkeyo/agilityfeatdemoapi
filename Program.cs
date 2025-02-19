@@ -6,16 +6,9 @@ using Backend.Services;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
-Env.Load();
 var connectionString = "Data Source=database.sqlite";
 
-// Verificar si la conexión es válida
-if (string.IsNullOrEmpty(connectionString))
-{
-    throw new InvalidOperationException("Error: La cadena de conexión a PostgreSQL no está configurada.");
-}
 
-// Habilitar CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
