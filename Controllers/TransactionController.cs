@@ -18,31 +18,65 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetAll() => Ok(await _service.GetAllAsync());
+        public async Task<ActionResult> GetAll()
+        {
+            var transactions = await _service.GetAllAsync();
+            return Ok(new { success = true, data = transactions });
+        }
+
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Transaction>> GetById(int id)
+        public async Task<ActionResult> GetById(int id)
         {
             var transaction = await _service.GetByIdAsync(id);
-            return transaction == null ? NotFound() : Ok(transaction);
+            if (transaction == null)
+                return NotFound(new { success = false, message = "Transaction not found" });
+
+            return Ok(new { success = true, data = transaction });
         }
+
 
         [HttpPost]
         public async Task<ActionResult> Insert([FromBody] Transaction transaction)
         {
             var id = await _service.InsertAsync(transaction);
-            return CreatedAtAction(nameof(GetById), new { id }, transaction);
+            transaction.Id = id;
+
+            return CreatedAtAction(nameof(GetById), new { id }, 
+                new { success = true, message = "Transaction created successfully", data = transaction });
         }
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] Transaction transaction)
         {
             transaction.Id = id;
-            return await _service.UpdateAsync(transaction) ? NoContent() : NotFound();
+            var updated = await _service.UpdateAsync(transaction);
+            
+            if (!updated)
+                return NotFound(new { success = false, message = "Transaction not found" });
+
+            return Ok(new { success = true, message = "Transaction updated successfully" });
         }
 
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id) =>
-            await _service.DeleteAsync(id) ? NoContent() : NotFound();
+        public async Task<ActionResult> Delete(int id)
+        {
+            var deleted = await _service.DeleteAsync(id);
+            
+            if (!deleted)
+                return NotFound(new { success = false, message = "Transaction not found" });
+
+            return Ok(new { success = true, message = "Transaction deleted successfully" });
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilteredTransactions([FromQuery] TransactionFilter filter)
+        {
+            var transactions = await _service.GetFilteredTransactionsAsync(filter);
+            return Ok(new { success = true, data = transactions });
+        }
+
     }
 }

@@ -11,5 +11,7 @@ namespace Backend.Core.Interfaces
         Task<int> InsertAsync(Transaction transaction);
         Task<bool> UpdateAsync(Transaction transaction);
         Task<bool> DeleteAsync(int id);
+
+        Task<IEnumerable<Transaction>> GetFilteredTransactionsAsync(TransactionFilter filter);
     }
 }
