@@ -5,6 +5,7 @@ using Backend.Repositories;
 using Backend.Services;
 using DotNetEnv;
 
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = "Data Source=database.sqlite";
 
