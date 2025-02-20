@@ -7,6 +7,6 @@ public class DemoTestController  : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok(new { message = "hello from Api" });
+        return Ok(new { message = "Wake up, Neo... The API has you." });
     }
 }
