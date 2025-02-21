@@ -1,0 +1,24 @@
+# Archivos binarios y compilados
+bin/
+bin/*
+obj/
+obj/*
+*.db
+
+# Configuración de usuario en Visual Studio
+.vscode/
+*.suo
+*.user
+*.cache
+*.log
+
+# Secretos y archivos de configuración
+appsettings.json
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.database.sqlite
