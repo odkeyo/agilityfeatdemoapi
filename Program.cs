@@ -7,7 +7,12 @@ using DotNetEnv;
 
 Env.Load();
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = "Data Source=database.sqlite";
+// Definir el path de la base de datos basado en el entorno
+var dbPath = builder.Environment.IsDevelopment()
+    ? Path.Combine(Directory.GetCurrentDirectory(), "database.sqlite") // Local
+    : Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? "D:\\home", "data", "database.sqlite"); // Azure
+
+var connectionString = $"Data Source={dbPath};Cache=Shared;";
 
 
 builder.Services.AddCors(options =>
